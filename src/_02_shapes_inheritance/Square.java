@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Square extends Shape {
 
-	Square(int xLocation, int yLocation, int size, Color color) {
+	public Square(int xLocation, int yLocation, int size, Color color) {
 		super(xLocation, yLocation, size, color);
 		// TODO Auto-generated constructor stub
 	}

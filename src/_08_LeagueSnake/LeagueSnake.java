@@ -1,11 +1,16 @@
 package _08_LeagueSnake;
 
+import java.awt.Color;
+
+import _02_shapes_inheritance.Square;
 import processing.core.PApplet;
 
 public class LeagueSnake extends PApplet {
     static final int WIDTH = 800;
     static final int HEIGHT = 800;
-    
+    Segment head;
+    int foodX;
+    int foodY;
     /*
      * Game variables
      * 
@@ -21,16 +26,20 @@ public class LeagueSnake extends PApplet {
      */
     @Override
     public void settings() {
-        
+        setSize(500,500);
     }
 
     @Override
     public void setup() {
-        
+        head = new Segment();
+        frameRate(20);
+        dropFood();
     }
 
     void dropFood() {
         // Set the food in a new random location
+    	foodX = ((int)random(50)*10);
+    	foodY = ((int)random(50)*10);
         
     }
 
@@ -42,12 +51,14 @@ public class LeagueSnake extends PApplet {
 
     @Override
     public void draw() {
-        
+        background(5);
+        drawFood();
+        drawSnake();
     }
 
     void drawFood() {
-        // Draw the food
-        
+        Square square = new Square(foodX,foodY,10,Color.cyan);
+       
     }
 
     void drawSnake() {
