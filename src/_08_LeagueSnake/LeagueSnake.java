@@ -8,6 +8,8 @@ import processing.core.PApplet;
 public class LeagueSnake extends PApplet {
     static final int WIDTH = 800;
     static final int HEIGHT = 800;
+    int direction = UP;
+    int eaten = 0;
     Segment head;
     int foodX;
     int foodY;
@@ -52,21 +54,25 @@ public class LeagueSnake extends PApplet {
     @Override
     public void draw() {
         background(5);
+        move();
         drawFood();
         drawSnake();
     }
 
     void drawFood() {
-        Square square = new Square(foodX,foodY,10,Color.cyan);
-       
+    	fill(255,0,0);
+    	rect(foodX,foodY,10,10);
+    
     }
 
     void drawSnake() {
-        // Draw the head of the snake followed by its tail
+        fill(100,0,100);
+        rect(head.x,head.y,10,10);
+        
     }
 
     void drawTail() {
-        // Draw each segment of the tail
+        
         
     }
 
@@ -96,31 +102,47 @@ public class LeagueSnake extends PApplet {
 
     @Override
     public void keyPressed() {
-        // Set the direction of the snake according to the arrow keys pressed
+        if(keyCode == CODED) {
+        	if() {
+        		
+        	}
+        
+        }
         
     }
 
     void move() {
         // Change the location of the Snake head based on the direction it is moving.
 
-        /*
+        
         if (direction == UP) {
-            // Move head up
+            head.y-=30;
             
         } else if (direction == DOWN) {
-            // Move head down
+            head.y+=30;
                 
         } else if (direction == LEFT) {
-            
+            head.x -=30;
         } else if (direction == RIGHT) {
+        	head.y-=30;
             
         }
-        */
+        
     }
 
     void checkBoundaries() {
-        // If the snake leaves the frame, make it reappear on the other side
-        
+        if (head.x >=800) {
+        	head.x = 0;
+        }
+        if (head.x >=0) {
+        	head.x = 800;
+        }
+        if(head.y >=800) {
+        	head.y = 0;
+        }
+        if (head.y >=0) {
+        	head.y = 800;
+        }
     }
 
     void eat() {
