@@ -11,9 +11,9 @@ package _08_LeagueSnake;
 public class Segment {
     int x;
     int y;
-    Segment(){
-    	x = 50;
-    	y = 50;
+    Segment(int xpos,int ypos){
+    	x = xpos;
+    	y = ypos;
     	
     }
 }

@@ -33,7 +33,7 @@ public class LeagueSnake extends PApplet {
 
 	@Override
 	public void setup() {
-		head = new Segment();
+		head = new Segment(50, 50);
 		frameRate(20);
 		dropFood();
 	}
@@ -69,13 +69,16 @@ public class LeagueSnake extends PApplet {
 	void drawSnake() {
 		fill(0, 100, 255);
 		rect(head.x, head.y, 10, 10);
+		manageTail();
 
 	}
 
 	void drawTail() {
-		Segment newTail = new Segment();
-		fill(0, 100, 255);
-		rect(newTail.x, newTail.y, 10, 10);
+		for (int i = 0; i < tail.size(); i++) {
+			Segment tailpos = tail.get(i);
+			fill(0, 100, 255);
+			rect(tailpos.x, tailpos.y, 10, 10);
+		}
 	}
 
 	/*
@@ -90,12 +93,21 @@ public class LeagueSnake extends PApplet {
 		// This produces the illusion of the snake tail moving.
 		checkTailCollision();
 		drawTail();
+		tail.add(new Segment(head.x, head.y));
+		tail.remove(0);
 
 	}
 
 	void checkTailCollision() {
 		// If the snake crosses its own tail, shrink the tail back to one segment
-
+		for (int i = 0; i < tail.size(); i++) {
+			Segment tailpos = tail.get(i);
+			if (head.x == tailpos.x && head.y == tailpos.y) {
+				eaten = 1;
+				tail.clear();
+				tail.add(new Segment(head.x, head.y));
+			}
+		}
 	}
 
 	/*
@@ -155,7 +167,7 @@ public class LeagueSnake extends PApplet {
 			checkBoundaries();
 
 		}
-		//System.out.println("MOVING");
+		// System.out.println("MOVING");
 
 	}
 
@@ -163,13 +175,13 @@ public class LeagueSnake extends PApplet {
 		if (head.x >= 800) {
 			head.x = 0;
 		}
-		if (head.x <= 0) {
+		else if (head.x <= 0) {
 			head.x = 800;
 		}
-		if (head.y >= 800) {
+		else if (head.y > 800) {
 			head.y = 0;
 		}
-		if (head.y <= 0) {
+		else if (head.y <= 0) {
 			head.y = 800;
 		}
 	}
@@ -180,6 +192,7 @@ public class LeagueSnake extends PApplet {
 		if (head.y == foodY && head.x == foodX) {
 			dropFood();
 			eaten += 1;
+			tail.add(new Segment(head.x, head.y));
 		}
 
 	}
